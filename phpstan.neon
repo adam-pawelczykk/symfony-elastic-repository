@@ -1,0 +1,5 @@
+parameters:
+    inferPrivatePropertyTypeFromConstructor: true
+    ignoreErrors:
+        # Coś nie radzi sobie z komponentem symfony do konfiguracji
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)#'

@@ -1,0 +1,32 @@
+services:
+  ATPawelczyk\Elastic\IndexManagerInterface: '@ATPawelczyk\Elastic\IndexManager'
+  ATPawelczyk\Elastic\ParamConverter\DocumentParamConverter:
+    tags: [ request.param_converter ]
+    arguments:
+      - '@Symfony\Component\Serializer\Normalizer\DenormalizerInterface'
+      - '@ATPawelczyk\Elastic\IndexManagerInterface'
+
+  ATPawelczyk\Elastic\InMemoryIndexManager:
+    public: true
+
+  ATPawelczyk\Elastic\CLI\CreateIndexesCLI:
+    public: true
+    tags:
+      - { name: 'console.command', command: 'gd_elastic:index:create' }
+    arguments:
+      - '@ATPawelczyk\Elastic\IndexManagerInterface'
+
+  ATPawelczyk\Elastic\CLI\UpdateIndexesCLI:
+    public: true
+    tags:
+      - { name: 'console.command', command: 'gd_elastic:index:update' }
+    arguments:
+      - '@ATPawelczyk\Elastic\IndexManagerInterface'
+
+  ATPawelczyk\Elastic\CLI\UpdateIndexesMappingCLI:
+    public: true
+    tags:
+      - { name: 'console.command', command: 'gd_elastic:index:update:mapping' }
+    arguments:
+      - '@ATPawelczyk\Elastic\IndexManagerInterface'
+
